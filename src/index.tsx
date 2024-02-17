@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import type { FC } from 'hono/jsx'
 
 const app = new Hono()
 
@@ -19,6 +20,18 @@ app.post('/posts', (c) => c.text('Created!', 201))
 
 // DELETE
 app.delete('/posts/:id', (c) => c.text(`${c.req.param('id')} is deleted!`))
+
+const View: FC= () => {
+  return (
+    <html>
+      <body>
+        <h1>Hello, my first Hono JSX!</h1>
+      </body>
+    </html>
+  )
+}
+
+app.get('/page', (c: any) => c.html(<View />))
 
 export default app
 
